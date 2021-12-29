@@ -3,6 +3,7 @@ package br.com.desafio.spring.g8.desafiospring.repository;
 import br.com.desafio.spring.g8.desafiospring.entity.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,6 +11,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Component
 public class ProductRepository implements IProductRepository<Product> {
     private List<Product> products = new ArrayList<Product>();
     private ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
