@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Product.json ###
+products.json
