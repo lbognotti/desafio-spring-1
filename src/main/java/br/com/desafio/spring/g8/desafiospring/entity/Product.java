@@ -20,4 +20,13 @@ public class Product {
     private  Integer quantity;
     private  Boolean freeShipping;
     private String prestige;
+
+    //Essas variaveis guardam se eh para filtrar. Quando verdadeiras ajudam a filtragem a fazer do tipo que esta true
+    private Boolean nameBool = false;
+    private Boolean categoryBool = false;
+    private Boolean brandBool = false;
+    private Boolean priceBool=false;
+    private  Boolean freeShippingBool = false;
+    private Boolean prestigeBool = false;
+
 }

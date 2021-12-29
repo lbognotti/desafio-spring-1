@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -39,6 +40,41 @@ public class ProductRepository implements IProductRepository<Product> {
     }
 
     @Override
+    public List<Product> findProductName(String productName) {
+        return List;
+    }
+
+    @Override
+    public List<Product> findCategory(String categoryName) {
+        return null;
+    }
+
+    @Override
+    public List<Product> findBrand(String brandName) {
+        return null;
+    }
+
+    @Override
+    public List<Product> findPrice(BigDecimal valuePrice) {
+        return null;
+    }
+
+    @Override
+    public List<Product> findFreeShipping(Boolean price) {
+        return null;
+    }
+
+    @Override
+    public List<Product> findPrestige(String prestige) {
+        return null;
+    }
+
+    @Override
+    public void indicaFiltragem(String filtro, boolean confirm) {
+
+    }
+
+    @Override
     public List<Product> findAllProductTwoCategory(String p1, String p2) {
         return null;
     }
@@ -62,4 +98,6 @@ public class ProductRepository implements IProductRepository<Product> {
     public List<Product> findAllProductIncreasingOrder() {
         return null;
     }
+
+
 }
