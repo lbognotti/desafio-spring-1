@@ -8,18 +8,23 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
+// Entendi que O product repository faz leitura e gravacao de dados em persistencia - Wolsen
 @Component
+
 public class ProductRepository implements IProductRepository<Product> {
-    private List<Product> products = new ArrayList<Product>();
+    private List<Product> products = new ArrayList<>(); //conferir se nao houve alteracao
     private ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
     private final String PATH = "products.json";
 
+
     @Override
     public void save(Product product) throws IOException {
-        product.setProductId((long) products.size()+1);
+        product.setProductId((long) products.size() + 1);
         products.add(product);
         objectMapper.writeValue(new File(PATH), products);
     }
@@ -34,32 +39,44 @@ public class ProductRepository implements IProductRepository<Product> {
 
     @Override
     public List<Product> findAllCategoryProduct(String categoryName) throws IOException {
-        List<Product> arrayProduct = this.findAllAvailableProduct();
-        return arrayProduct.stream().filter(p -> p.getCategory().equals(categoryName)).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Product> findAllProductTwoCategory(String p1, String p2) {
         return null;
     }
 
     @Override
-    public List<Product> findAllProductDecreasingAlfa() {
+    public List<Product> findAllProductByName(List<Product> products, String productName) throws IOException {
+        return products.stream()
+                .filter(product -> product.getName().equals(productName))
+                .collect(Collectors.toList());
+    }
+
+
+    @Override
+    public List<Product> findAllProductByCategory(List<Product> products, String categoryName) throws IOException {
+        return products.stream()
+                .filter(product -> product.getCategory().equals(categoryName))
+                .collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<Product> findAllProductByBrand(List<Product> products, String brandName) throws IOException {
         return null;
     }
 
     @Override
-    public List<Product> findAllProductIncreasingAlfa() {
+    public List<Product> findAllProductByPrice(List<Product> products, BigDecimal priceValue) throws IOException {
         return null;
     }
 
     @Override
-    public List<Product> findAllProductDecreasingOrder() {
+    public List<Product> findAllProductByFreeShipping(List<Product> products, Boolean value) throws IOException {
         return null;
     }
 
     @Override
-    public List<Product> findAllProductIncreasingOrder() {
+    public List<Product> findAllProductByPrestige(List<Product> products, String prestige) throws IOException {
         return null;
     }
+
+
 }

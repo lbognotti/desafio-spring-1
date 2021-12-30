@@ -1,5 +1,7 @@
 package br.com.desafio.spring.g8.desafiospring.controller;
 
+
+import br.com.desafio.spring.g8.desafiospring.advice.handler.ProductNotFoundException;
 import br.com.desafio.spring.g8.desafiospring.dto.CreateProductsDTO;
 import br.com.desafio.spring.g8.desafiospring.dto.ListProductsDTO;
 import br.com.desafio.spring.g8.desafiospring.dto.ProductDTO;
@@ -11,10 +13,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+//Product Controller - essa classe corresponde ao C do modelo MVC - Wolsen
 import java.util.stream.Collectors;
 
+
 @RestController()
-@RequestMapping("/product")
+@RequestMapping("/api/v1")
 public class ProductController {
 
     @Autowired
@@ -30,6 +35,11 @@ public class ProductController {
     public ResponseEntity<List<Product>> findAll() throws IOException {
         return ResponseEntity.ok(this.productService.findAllProduct());
     }
+
+
+    @GetMapping("/articles")
+    public ResponseEntity<List<Product>> findAllProductFilter(@RequestParam Map<String, String> allParams) throws IOException {
+        return ResponseEntity.ok(this.productService.findFilter(allParams));
 
     //Teste de DTO - Get
     @GetMapping("/findAllDto")

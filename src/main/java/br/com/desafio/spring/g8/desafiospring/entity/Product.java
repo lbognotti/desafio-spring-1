@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+//Faz a classe product, contendo as suas informacoes que serao utilizadas em outras partes do codigo
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -20,4 +22,6 @@ public class Product {
     private Integer quantity;
     private Boolean freeShipping;
     private String prestige;
+
+
 }
