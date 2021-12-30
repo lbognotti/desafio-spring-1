@@ -15,19 +15,12 @@ import java.util.stream.Collectors;
 
 // Entendi que O product repository faz leitura e gravacao de dados em persistencia - Wolsen
 @Component
+
 public class ProductRepository implements IProductRepository<Product> {
     private List<Product> products = new ArrayList<>(); //conferir se nao houve alteracao
     private ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
     private final String PATH = "products.json";
 
-    //Essas variaveis guardam se eh para filtrar. Quando verdadeiras ajudam a filtragem a fazer do tipo que esta true
-    //Retirar, pois nao vamos usar. Conferido com a PO.
-//    private Boolean nameBool = false;
-//    private Boolean categoryBool = false;
-//    private Boolean brandBool = false;
-//    private Boolean priceBool=false;
-//    private Boolean freeShippingBool = false;
-//    private Boolean prestigeBool = false;
 
     @Override
     public void save(Product product) throws IOException {
@@ -45,12 +38,14 @@ public class ProductRepository implements IProductRepository<Product> {
     }
 
     @Override
-    public List<Product> findAllCategoryProduct(String categoryName) throws IOException {
-        List<Product> arrayProduct = this.findAllAvailableProduct();
-        return arrayProduct.stream().filter(p -> p.getCategory().equals(categoryName)).collect(Collectors.toList());
+    public List<Product> findAllProductByName(List<Product> products, String productName) throws IOException {
+        return products.stream()
+                .filter(product -> product.getName().equals(productName))
+                .collect(Collectors.toList());
     }
 
     @Override
+
     public List<Product> findAllProductByName(String productName) {
 
         return null;
@@ -115,31 +110,37 @@ public class ProductRepository implements IProductRepository<Product> {
 //fim dos metodos com nomes antigos
 
 
+
     @Override
-    public List<Product> findAllProductTwoCategory(String p1, String p2) {
+    public List<Product> findAllProductByCategory(List<Product> products, String categoryName) throws IOException {
+        return products.stream()
+                .filter(product -> product.getCategory().equals(categoryName))
+                .collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<Product> findAllProductByBrand(String brandName) throws IOException {
         return null;
     }
 
     @Override
-    public List<Product> findAllProductDecreasingAlfa() {
+    public List<Product> findAllProductByPrice(BigDecimal priceValue) throws IOException {
         return null;
     }
 
     @Override
-    public List<Product> findAllProductIncreasingAlfa() {
+    public List<Product> findAllProductByFreeShipping(Boolean value) throws IOException {
         return null;
     }
 
     @Override
-    public List<Product> findAllProductDecreasingOrder() {
-        return null;
-    }
-
-    @Override
-    public List<Product> findAllProductIncreasingOrder() {
+    public List<Product> findAllProductByPrestige(String prestige) throws IOException {
         return null;
     }
 
 
-    }
+
+
+
 }
