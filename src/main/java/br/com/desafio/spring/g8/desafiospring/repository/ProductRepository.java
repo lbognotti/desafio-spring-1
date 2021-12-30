@@ -8,11 +8,12 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
-public class ProductRepository implements IProductRepository<Product> {
+public  class ProductRepository implements IProductRepository<Product> {
     private List<Product> products = new ArrayList<Product>();
     private ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
     private final String PATH = "products.json";
@@ -33,33 +34,37 @@ public class ProductRepository implements IProductRepository<Product> {
     }
 
     @Override
-    public List<Product> findAllCategoryProduct(String categoryName) throws IOException {
-        List<Product> arrayProduct = this.findAllAvailableProduct();
-        return arrayProduct.stream().filter(p -> p.getCategory().equals(categoryName)).collect(Collectors.toList());
+    public List<Product> findAllProductByName(List<Product> products, String productName) throws IOException {
+        return products.stream()
+                .filter(product -> product.getName().equals(productName))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<Product> findAllProductTwoCategory(String p1, String p2) {
+    public List<Product> findAllProductByCategory(List<Product> products, String categoryName) throws IOException {
+        return products.stream()
+                .filter(product -> product.getCategory().equals(categoryName))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> findAllProductByBrand(String brandName) throws IOException {
         return null;
     }
 
     @Override
-    public List<Product> findAllProductDecreasingAlfa() {
+    public List<Product> findAllProductByPrice(BigDecimal priceValue) throws IOException {
         return null;
     }
 
     @Override
-    public List<Product> findAllProductIncreasingAlfa() {
+    public List<Product> findAllProductByFreeShipping(Boolean value) throws IOException {
         return null;
     }
 
     @Override
-    public List<Product> findAllProductDecreasingOrder() {
+    public List<Product> findAllProductByPrestige(String prestige) throws IOException {
         return null;
     }
 
-    @Override
-    public List<Product> findAllProductIncreasingOrder() {
-        return null;
-    }
 }

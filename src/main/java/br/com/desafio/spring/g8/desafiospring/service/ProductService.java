@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductService {
@@ -34,5 +35,22 @@ public class ProductService {
             throw new ProductNotFoundException(e.getMessage());
         }
        return products;
+    }
+
+    public List<Product> findFilter(Map<String, String> allParams) throws IOException {
+        List<Product> products = this.productRepository.findAllAvailableProduct();
+        for (Map.Entry<String, String> params : allParams.entrySet()) {
+            switch (params.getKey()) {
+                case "product":
+                    products = this.productRepository.findAllProductByName(products, params.getValue());
+                break;
+                case "category":
+                    products = this.productRepository.findAllProductByCategory(products, params.getValue());
+                break;
+                default:
+                    throw new ProductNotFoundException("Product not found");
+            }
+        }
+        return products;
     }
 }
