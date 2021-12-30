@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+//Faz a classe product, contendo as suas informacoes que serao utilizadas em outras partes do codigo
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -21,12 +23,5 @@ public class Product {
     private  Boolean freeShipping;
     private String prestige;
 
-    //Essas variaveis guardam se eh para filtrar. Quando verdadeiras ajudam a filtragem a fazer do tipo que esta true
-    private Boolean nameBool = false;
-    private Boolean categoryBool = false;
-    private Boolean brandBool = false;
-    private Boolean priceBool=false;
-    private  Boolean freeShippingBool = false;
-    private Boolean prestigeBool = false;
 
 }
