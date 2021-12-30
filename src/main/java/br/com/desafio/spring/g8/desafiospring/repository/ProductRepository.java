@@ -56,16 +56,22 @@ public class ProductRepository implements IProductRepository<Product> {
 
     @Override
     public List<Product> findAllProductByPrice(List<Product> products, BigDecimal priceValue) throws IOException {
-        return null;
+        return products.stream()
+                .filter(product -> product.getPrice().equals(priceValue))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Product> findAllProductByFreeShipping(List<Product> products, Boolean value) throws IOException {
-        return null;
+        return products.stream()
+                .filter(product -> product.getFreeShipping().equals(value))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Product> findAllProductByPrestige(List<Product> products, String prestige) throws IOException {
-        return null;
+        return products.stream()
+                .filter(product -> product.getPrestige().equals(prestige))
+                .collect(Collectors.toList());
     }
 }
