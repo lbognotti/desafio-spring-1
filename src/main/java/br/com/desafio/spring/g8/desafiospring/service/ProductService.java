@@ -6,6 +6,7 @@ import br.com.desafio.spring.g8.desafiospring.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -51,21 +52,20 @@ public class ProductService {
 
     public List<Product> choiceFilter (String filterName, String filterValue, List<Product> products) throws IOException{
         switch (filterName.toLowerCase()) {
-
-            case "name":
+            case "product":
                 products = productRepository.findAllProductByName(products, filterValue);
                 break;
 //            case "category":
-//                productRepository.findAllProductByCategory(products,  filterValue);
+//                products = productRepository.findAllProductByCategory(products,  filterValue);
 //                break;
 //            case "brand":
-//                productRepository.findAllProductByBrand(products,  filterValue);
+//                products = productRepository.findAllProductByBrand(products,  filterValue);
 //                break;
-////            case "price":
-////                productRepository.findAllProductByPrice(products, filterValue);
-////                break;
+//            case "price":
+//                products = productRepository.findAllProductByPrice(products, new BigDecimal(filterValue));
+//                break;
 //            case "prestige":
-//                productRepository.findAllProductByPrestige(products,  filterValue);
+//                products = productRepository.findAllProductByPrestige(products,  filterValue);
 //                break;
             default:
                 System.out.println("Nenhum filtro aplicado");
