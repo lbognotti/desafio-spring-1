@@ -49,7 +49,9 @@ public class ProductRepository implements IProductRepository<Product> {
 
     @Override
     public List<Product> findAllProductByBrand(List<Product> products, String brandName) throws IOException {
-        return null;
+        return products.stream()
+                .filter(product -> product.getBrand().equals(brandName))
+                .collect(Collectors.toList());
     }
 
     @Override
