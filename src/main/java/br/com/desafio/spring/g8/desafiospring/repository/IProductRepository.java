@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
+//Interface que sera usada no ProductRepository - Wolsen
+
 public interface IProductRepository<T> {
         void save(T t) throws IOException;
         List<T> findAllAvailableProduct() throws IOException;
@@ -13,14 +15,17 @@ public interface IProductRepository<T> {
         //List<T> findAllProductIncreasingAlfa();
         //List<T> findAllProductDecreasingOrder();
         //List<T> findAllProductIncreasingOrder();
-        List<T> findProductName (String productName);
-        List<T> findCategory (String categoryName);
-        List<T> findBrand (String brandName);
-        List<T> findPrice (BigDecimal valuePrice);
-        List<T> findFreeShipping (Boolean price);
-        List<T> findPrestige (String prestige);
+        List<T> findAllProductByName (String productName);
+        List<T> findAllProductByCategory (String categoryName);
+        List<T> findAllProductByBrand (String brandName);
+        List<T> findAllProductByPrice (BigDecimal valuePrice);
+        List<T> findAllProductIsFreeShipping (Boolean shipping);
+        List<T> findAllProductByPrestige (String prestige);
+        //List<T> choiceFilter(String filterName);
+        //void indicaFiltragem (String filtro, boolean confirm);
 
-        void indicaFiltragem (String filtro, boolean confirm);
+
+
 
 
         //6Metodos
