@@ -1,5 +1,6 @@
 package br.com.desafio.spring.g8.desafiospring.controller;
 
+import br.com.desafio.spring.g8.desafiospring.dto.CreateProductsDTO;
 import br.com.desafio.spring.g8.desafiospring.dto.ProductDTO;
 import br.com.desafio.spring.g8.desafiospring.entity.Product;
 import br.com.desafio.spring.g8.desafiospring.service.ProductService;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController()
 @RequestMapping("/product")
@@ -31,18 +33,23 @@ public class ProductController {
     //Teste de DTO - Get
     @GetMapping("/findAllDto")
     public ResponseEntity<List<ProductDTO>> findAllDto() throws IOException {
-        return ResponseEntity.ok(ProductDTO.mapearConverte(this.productService.findAllProduct()));
+        List<ProductDTO> productsDto = this.productService.findAllProduct()
+                .stream()
+                .map(product -> ProductDTO.fromEntity(product))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(productsDto);
     }
 
     //Teste de DTO - Post
     @PostMapping("/createDto")
-    public ResponseEntity<Object> createDto(@RequestBody List<Product> dtos) throws IOException {
-        List<ProductDTO> products = ProductDTO.mapearConverte(dtos);
+    public ResponseEntity<Object> createDto(@RequestBody CreateProductsDTO createProductsDTO) throws IOException {
+        List<Product> products = createProductsDTO.getArticles()
+                .stream()
+                .map(article -> article.toEntity())
+                .collect(Collectors.toList());
+
         this.productService.createProduct(products);
-
-        //this.productService.createProduct(products);
         return ResponseEntity.ok().build();
-
     }
-    }
+}
 
