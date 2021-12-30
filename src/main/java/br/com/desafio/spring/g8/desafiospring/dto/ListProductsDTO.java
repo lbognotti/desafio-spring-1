@@ -9,7 +9,6 @@ import java.util.List;
 @Data
 @Builder
 public class ListProductsDTO {
-
     @JsonProperty("articlesDTO")
     List<ProductDTO> articlesDTO = null;
 }

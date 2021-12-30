@@ -12,15 +12,11 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
-// Entendi que O product repository faz leitura e gravacao de dados em persistencia - Wolsen
 @Component
-
 public class ProductRepository implements IProductRepository<Product> {
-    private List<Product> products = new ArrayList<>(); //conferir se nao houve alteracao
+    private List<Product> products = new ArrayList<>();
     private ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
     private final String PATH = "products.json";
-
 
     @Override
     public void save(Product product) throws IOException {
@@ -38,24 +34,17 @@ public class ProductRepository implements IProductRepository<Product> {
     }
 
     @Override
-    public List<Product> findAllCategoryProduct(String categoryName) throws IOException {
-        return null;
-    }
-
-    @Override
     public List<Product> findAllProductByName(List<Product> products, String productName) throws IOException {
         return products.stream()
                 .filter(product -> product.getName().equals(productName))
                 .collect(Collectors.toList());
     }
 
-
     @Override
     public List<Product> findAllProductByCategory(List<Product> products, String categoryName) throws IOException {
         return products.stream()
                 .filter(product -> product.getCategory().equals(categoryName))
                 .collect(Collectors.toList());
-
     }
 
     @Override
@@ -77,6 +66,4 @@ public class ProductRepository implements IProductRepository<Product> {
     public List<Product> findAllProductByPrestige(List<Product> products, String prestige) throws IOException {
         return null;
     }
-
-
 }

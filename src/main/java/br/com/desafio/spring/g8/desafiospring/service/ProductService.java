@@ -3,13 +3,11 @@ package br.com.desafio.spring.g8.desafiospring.service;
 import br.com.desafio.spring.g8.desafiospring.advice.handler.ProductNotFoundException;
 import br.com.desafio.spring.g8.desafiospring.entity.Product;
 import br.com.desafio.spring.g8.desafiospring.repository.ProductRepository;
-import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
 
 @Service
 public class ProductService {
@@ -18,7 +16,6 @@ public class ProductService {
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
-
 
     public void createProduct(List<Product> products) throws IOException {
         for (Product product : products) {
@@ -40,12 +37,17 @@ public class ProductService {
        return products;
     }
 
+    public List<Product> findFilter(Map<String, String> allParams) throws IOException {
+        List<Product> products = this.productRepository.findAllAvailableProduct();
 
+        for (Map.Entry<String, String> params : allParams.entrySet()) {
+            String filterName = params.getKey();
+            String filterValue = params.getValue();
+            products = this.choiceFilter(filterName, filterValue, products);
+        }
 
-    // /api/v1/articles?product=productName&amp;brand=brandName
-    //adicionarIgonoreCase
-    //queremos utilizar o dto para realizar as filtragens todas, para no final retornar ele para onde for necessario
-    // List<ProductDTO> listForFilter;
+        return products;
+    }
 
     public List<Product> choiceFilter (String filterName, String filterValue, List<Product> products) throws IOException{
         switch (filterName.toLowerCase()) {
@@ -67,32 +69,25 @@ public class ProductService {
 //                break;
             default:
                 System.out.println("Nenhum filtro aplicado");
+        }
+        return products;
+    }
 
-                //add trhows
+//    public List<Product> choiceOrder (List<Product> products) {
+//        switch (orderValue) {
+//            case "0":
+//                List<Product> p = this.productRepository.orderAlphabeticCrescent(products);
+//            break;
+//            case "1":
+//                List<Product> p = this.productRepository.orderAlphabeticalDescending(products);
+//                break;
+//            case "2":
+//                List<Product> p = this.productRepository.orderPriceDescending(products);
+//                break;
+//            case "3":
+//                List<Product> p = this.productRepository.orderPriceCrescent(products);
+//                break;
 //            default:
-//                throw new ProductNotFoundException("Product not found");
-        }
-        return products;
-    }
-
-        /*
-        List<Product> produtoss = productRepository.findAllAvailableProduct();
-        produtoss = produtoss.choiceFilter(parametro 1, filterValue);
-        produtoss = produtoss.choiceFilter(parametro 2);
-        Lista criada;
-        listacriada = listadeprodutos.filtra(lista criada);
-        listacriada
-        */
-
-    public List<Product> findFilter(Map<String, String> allParams) throws IOException {
-        List<Product> products = this.productRepository.findAllAvailableProduct();
-
-        for (Map.Entry<String, String> params : allParams.entrySet()) {
-            String filterName = params.getKey();
-            String filterValue = params.getValue();
-                   products = this.choiceFilter(filterName,filterValue, products);
-
-        }
-        return products;
-    }
+//        }
+//    }
 }
