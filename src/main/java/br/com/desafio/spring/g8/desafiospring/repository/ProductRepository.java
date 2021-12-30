@@ -12,11 +12,22 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
+// Entendi que O product repository faz leitura e gravacao de dados em persistencia - Wolsen
 @Component
 public class ProductRepository implements IProductRepository<Product> {
-    private List<Product> products = new ArrayList<Product>();
+    private List<Product> products = new ArrayList<>(); //conferir se nao houve alteracao
     private ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
     private final String PATH = "products.json";
+
+    //Essas variaveis guardam se eh para filtrar. Quando verdadeiras ajudam a filtragem a fazer do tipo que esta true
+    //Retirar, pois nao vamos usar. Conferido com a PO.
+//    private Boolean nameBool = false;
+//    private Boolean categoryBool = false;
+//    private Boolean brandBool = false;
+//    private Boolean priceBool=false;
+//    private Boolean freeShippingBool = false;
+//    private Boolean prestigeBool = false;
 
     @Override
     public void save(Product product) throws IOException {
@@ -39,6 +50,39 @@ public class ProductRepository implements IProductRepository<Product> {
         return arrayProduct.stream().filter(p -> p.getCategory().equals(categoryName)).collect(Collectors.toList());
     }
 
+    @Override
+    public List<Product> findAllProductByName(String productName) {
+
+        return null;
+    }
+
+    @Override
+    public List<Product> findAllProductByCategory(String categoryName) {
+
+        return null;
+    }
+
+    @Override
+    public List<Product> findAllProductByBrand(String brandName) {
+        return null;
+    }
+
+    @Override
+    public List<Product> findAllProductByPrice(BigDecimal valuePrice) {
+        return null;
+    }
+
+    @Override
+    public List<Product> findAllProductIsFreeShipping(Boolean shipping) {
+        return null;
+    }
+
+    @Override
+    public List<Product> findAllProductByPrestige(String prestige) {
+        return null;
+    }
+
+    //Acredito que esses metodos estao sendo subistituidos por outros com melhores nomes
     @Override
     public List<Product> findProductName(String productName) {
         return List;
@@ -68,11 +112,8 @@ public class ProductRepository implements IProductRepository<Product> {
     public List<Product> findPrestige(String prestige) {
         return null;
     }
+//fim dos metodos com nomes antigos
 
-    @Override
-    public void indicaFiltragem(String filtro, boolean confirm) {
-
-    }
 
     @Override
     public List<Product> findAllProductTwoCategory(String p1, String p2) {
@@ -100,4 +141,5 @@ public class ProductRepository implements IProductRepository<Product> {
     }
 
 
+    }
 }
