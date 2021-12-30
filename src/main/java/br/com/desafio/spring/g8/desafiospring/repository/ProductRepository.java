@@ -74,4 +74,14 @@ public class ProductRepository implements IProductRepository<Product> {
                 .filter(product -> product.getPrestige().equals(prestige))
                 .collect(Collectors.toList());
     }
+
+    public List<Product> orderPriceCrescent(List<Product> productsList) {
+        Comparator<Product> comparatorByPrice = Comparator.comparing(product -> product.getPrice());
+        productsList.sort(comparatorByPrice);
+        return productsList;
+    }
+
+    public List<Product> orderPriceDescending(List<Product> products) {
+        return null;
+    }
 }

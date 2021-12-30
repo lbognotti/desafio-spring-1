@@ -29,7 +29,7 @@ public class ProductService {
     }
 
     public List<Product> findAllProduct() throws IOException {
-        List<Product> products = null;
+        List<Product> products;
         try {
             products = this.productRepository.findAllAvailableProduct();
         } catch (IOException e) {
@@ -46,7 +46,6 @@ public class ProductService {
             String filterValue = params.getValue();
             products = this.choiceFilter(filterName, filterValue, products);
         }
-
         return products;
     }
 
@@ -55,39 +54,43 @@ public class ProductService {
             case "product":
                 products = productRepository.findAllProductByName(products, filterValue);
                 break;
-//            case "category":
-//                products = productRepository.findAllProductByCategory(products,  filterValue);
-//                break;
-//            case "brand":
-//                products = productRepository.findAllProductByBrand(products,  filterValue);
-//                break;
-//            case "price":
-//                products = productRepository.findAllProductByPrice(products, new BigDecimal(filterValue));
-//                break;
-//            case "prestige":
-//                products = productRepository.findAllProductByPrestige(products,  filterValue);
-//                break;
+            case "category":
+                products = productRepository.findAllProductByCategory(products,  filterValue);
+                break;
+            case "brand":
+                products = productRepository.findAllProductByBrand(products,  filterValue);
+                break;
+            case "price":
+                products = productRepository.findAllProductByPrice(products, new BigDecimal(filterValue));
+                break;
+            case "prestige":
+                products = productRepository.findAllProductByPrestige(products,  filterValue);
+                break;
+            case "order":
+                products = this.useOrder(products, filterValue);
+                break;
             default:
                 System.out.println("Nenhum filtro aplicado");
         }
         return products;
     }
 
-//    public List<Product> choiceOrder (List<Product> products) {
-//        switch (orderValue) {
-//            case "0":
-//                List<Product> p = this.productRepository.orderAlphabeticCrescent(products);
-//            break;
-//            case "1":
-//                List<Product> p = this.productRepository.orderAlphabeticalDescending(products);
-//                break;
-//            case "2":
-//                List<Product> p = this.productRepository.orderPriceDescending(products);
-//                break;
-//            case "3":
-//                List<Product> p = this.productRepository.orderPriceCrescent(products);
-//                break;
-//            default:
-//        }
-//    }
+    public List<Product> useOrder(List<Product> products, String orderValue) {
+        switch (orderValue) {
+            //case "0":
+            //    p = this.productRepository.orderAlphabeticalCrescent(products);
+            //break;
+            //case "1":
+            //    p = this.productRepository.orderAlphabeticalDescending(products);
+            //    break;
+            case "2":
+                products = this.productRepository.orderPriceDescending(products);
+                break;
+            case "3":
+                products = this.productRepository.orderPriceCrescent(products);
+                break;
+            default:
+        }
+        return products;
+    }
 }
