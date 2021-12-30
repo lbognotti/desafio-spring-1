@@ -19,8 +19,8 @@ public class Product {
     private String category;
     private String brand;
     private BigDecimal price;
-    private  Integer quantity;
-    private  Boolean freeShipping;
+    private Integer quantity;
+    private Boolean freeShipping;
     private String prestige;
 
 
