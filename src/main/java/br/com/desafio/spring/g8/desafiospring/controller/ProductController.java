@@ -1,6 +1,7 @@
 package br.com.desafio.spring.g8.desafiospring.controller;
 
 import br.com.desafio.spring.g8.desafiospring.dto.CreateProductsDTO;
+import br.com.desafio.spring.g8.desafiospring.dto.ListProductsDTO;
 import br.com.desafio.spring.g8.desafiospring.dto.ProductDTO;
 import br.com.desafio.spring.g8.desafiospring.entity.Product;
 import br.com.desafio.spring.g8.desafiospring.service.ProductService;
@@ -32,12 +33,17 @@ public class ProductController {
 
     //Teste de DTO - Get
     @GetMapping("/findAllDto")
-    public ResponseEntity<List<ProductDTO>> findAllDto() throws IOException {
+    public ResponseEntity<ListProductsDTO> findAllDto() throws IOException {
         List<ProductDTO> productsDto = this.productService.findAllProduct()
                 .stream()
                 .map(product -> ProductDTO.fromEntity(product))
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(productsDto);
+
+        ListProductsDTO responseBody = ListProductsDTO.builder()
+                .articlesDTO(productsDto)
+                .build();
+
+        return ResponseEntity.ok(responseBody);
     }
 
     //Teste de DTO - Post

@@ -19,9 +19,13 @@ public class ProductDTO implements IDTO<Product> {
     private Integer quantity;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String category;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String brand;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private BigDecimal price;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Boolean freeShipping;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String prestige;
 
     @Override
