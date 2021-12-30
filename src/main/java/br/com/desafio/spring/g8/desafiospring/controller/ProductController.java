@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
+
+//Product Controller - essa classe corresponde ao C do modelo MVC - Wolsen
+
 @RestController()
 @RequestMapping("/product")
 public class ProductController {
@@ -25,5 +28,8 @@ public class ProductController {
     @GetMapping("/findAll")
     public ResponseEntity<List<Product>> findAll() throws IOException {
         return ResponseEntity.ok(this.productService.findAllProduct());
+    }
+
+
     }
 }
