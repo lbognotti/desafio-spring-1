@@ -32,28 +32,13 @@ public interface IProductRepository<T> {
 
 
 
-        //6Metodos
-        //metodo transforma em true = recebe string e boolean
-
-
-        //transforma 1
-        //trasnsforma 2
-        //trata
-
-        // filtra 1 case
-        //filtra 2 case
-
-
-        //filtro 1 pega lista completa retorna a lista filtrada;
-        //fitro 2 pega a lista filtrada retorna listra refiltrada;
-
 
 
         List<T> findAllProductByName(List<Product> products, String productName) throws IOException;
         List<T> findAllProductByCategory(List<Product> products, String categoryName) throws IOException;
-        List<T> findAllProductByBrand(String brandName) throws IOException;
-        List<T> findAllProductByPrice(BigDecimal priceValue) throws IOException;
-        List<T> findAllProductByFreeShipping(Boolean value) throws IOException;
-        List<T> findAllProductByPrestige(String prestige) throws IOException;
+        List<T> findAllProductByBrand(List<Product> products, String brandName) throws IOException;
+        List<T> findAllProductByPrice(List<Product> products, BigDecimal priceValue) throws IOException;
+        List<T> findAllProductByFreeShipping(List<Product> products, Boolean value) throws IOException;
+        List<T> findAllProductByPrestige(List<Product> products, String prestige) throws IOException;
 
 }

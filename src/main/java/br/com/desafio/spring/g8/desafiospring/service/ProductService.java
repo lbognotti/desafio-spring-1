@@ -47,27 +47,32 @@ public class ProductService {
     //queremos utilizar o dto para realizar as filtragens todas, para no final retornar ele para onde for necessario
     // List<ProductDTO> listForFilter;
 
-    public void choiceFilter (String filterName, String filterValue) {
+    public List<Product> choiceFilter (String filterName, String filterValue, List<Product> products) throws IOException{
         switch (filterName.toLowerCase()) {
 
             case "name":
-                productRepository.findAllProductByName(String filterValue);
+                products = productRepository.findAllProductByName(products, filterValue);
                 break;
-            case "category":
-                productRepository.findAllProductByCategory(String filterValue);
-                break;
-            case "brand":
-                productRepository.findAllProductByBrand(String filterValue);
-                break;
-            case "price":
-                productRepository.findAllProductByPrice();
-                break;
-            case "prestige":
-                productRepository.findAllProductByPrestige(String filterValue);
-                break;
+//            case "category":
+//                productRepository.findAllProductByCategory(products,  filterValue);
+//                break;
+//            case "brand":
+//                productRepository.findAllProductByBrand(products,  filterValue);
+//                break;
+////            case "price":
+////                productRepository.findAllProductByPrice(products, filterValue);
+////                break;
+//            case "prestige":
+//                productRepository.findAllProductByPrestige(products,  filterValue);
+//                break;
             default:
                 System.out.println("Nenhum filtro aplicado");
+
+                //add trhows
+//            default:
+//                throw new ProductNotFoundException("Product not found");
         }
+        return products;
     }
 
         /*
@@ -81,17 +86,12 @@ public class ProductService {
 
     public List<Product> findFilter(Map<String, String> allParams) throws IOException {
         List<Product> products = this.productRepository.findAllAvailableProduct();
+
         for (Map.Entry<String, String> params : allParams.entrySet()) {
-            switch (params.getKey()) {
-                case "product":
-                    products = this.productRepository.findAllProductByName(products, params.getValue());
-                break;
-                case "category":
-                    products = this.productRepository.findAllProductByCategory(products, params.getValue());
-                break;
-                default:
-                    throw new ProductNotFoundException("Product not found");
-            }
+            String filterName = params.getKey();
+            String filterValue = params.getValue();
+                   products = this.choiceFilter(filterName,filterValue, products);
+
         }
         return products;
     }
