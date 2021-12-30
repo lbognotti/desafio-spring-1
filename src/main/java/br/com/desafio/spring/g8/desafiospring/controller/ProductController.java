@@ -17,15 +17,10 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping("/create")
+    @PostMapping("/insert-articles-request")
     public ResponseEntity<Object> create(@RequestBody List<Product> products) throws IOException {
         this.productService.createProduct(products);
         return ResponseEntity.ok().build();
-    }
-
-    @GetMapping("/findAll")
-    public ResponseEntity<List<Product>> findAll() throws IOException {
-        return ResponseEntity.ok(this.productService.findAllProduct());
     }
 
     @GetMapping("/articles")
