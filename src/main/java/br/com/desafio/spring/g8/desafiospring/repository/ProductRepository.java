@@ -81,7 +81,9 @@ public class ProductRepository implements IProductRepository<Product> {
         return productsList;
     }
 
-    public List<Product> orderPriceDescending(List<Product> products) {
-        return null;
+    public List<Product> orderPriceDescending(List<Product> productsList) {
+        Comparator<Product> comparatorByPrice = Comparator.comparing(product -> 1 / product.getPrice().doubleValue());
+        productsList.sort(comparatorByPrice);
+        return productsList;
     }
 }
