@@ -77,12 +77,12 @@ public class ProductService {
 
     public List<Product> useOrder(List<Product> products, String orderValue) {
         switch (orderValue) {
-            //case "0":
-            //    p = this.productRepository.orderAlphabeticalCrescent(products);
-            //break;
-            //case "1":
-            //    p = this.productRepository.orderAlphabeticalDescending(products);
-            //    break;
+            case "0":
+                products = this.productRepository.orderAlphabeticalCrescent(products);
+            break;
+            case "1":
+                products = this.productRepository.orderAlphabeticalDescending(products);
+                break;
             case "2":
                 products = this.productRepository.orderPriceDescending(products);
                 break;
