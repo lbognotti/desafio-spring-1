@@ -63,6 +63,9 @@ public class ProductService {
             case "price":
                 products = productRepository.findAllProductByPrice(products, new BigDecimal(filterValue));
                 break;
+            case "freeShipping":
+                    products = productRepository.findAllProductByFreeShipping(products, Boolean.valueOf(filterValue));
+                break;
             case "prestige":
                 products = productRepository.findAllProductByPrestige(products,  filterValue);
                 break;
