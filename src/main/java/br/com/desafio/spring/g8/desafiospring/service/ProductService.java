@@ -20,6 +20,12 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    /**
+     * @author Lucas Bognotti
+     * @param products - lista de produtos para salvar no products.json
+     * @throws IOException - erro ao escrever ao salvar no arquivo
+     * @description - recebe uma lista de product, a percorre e salva produto por produto
+     */
     public void createProduct(List<Product> products) throws IOException {
         for (Product product : products) {
             try {
@@ -30,6 +36,13 @@ public class ProductService {
         }
     }
 
+    /**
+     * @author Lucas Bognotti
+     * @description - recebe um map de chave e valor, percorre o map  e usa o metodo escolhe o filtro correspondente para essa chave e valor
+     * @param allParams - todos os query parms da requisicao
+     * @return - retorna uma lista de produtos filtrada por todos os filtros aplicados
+     * @throws IOException - excessao ao tentar ler o arquivo products.json
+     */
     public List<Product> findFilter(Map<String, String> allParams) throws IOException {
         List<Product> products = this.productRepository.findAllAvailableProduct();
 
