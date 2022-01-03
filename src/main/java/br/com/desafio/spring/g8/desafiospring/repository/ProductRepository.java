@@ -75,24 +75,28 @@ public class ProductRepository implements IProductRepository<Product> {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public List<Product> orderPriceCrescent(List<Product> productsList) {
         Comparator<Product> comparatorByPrice = Comparator.comparing(product -> product.getPrice());
         productsList.sort(comparatorByPrice);
         return productsList;
     }
 
+    @Override
     public List<Product> orderPriceDescending(List<Product> productsList) {
         Comparator<Product> comparatorByPrice = Comparator.comparing(product -> 1 / product.getPrice().doubleValue());
         productsList.sort(comparatorByPrice);
         return productsList;
     }
 
+    @Override
     public List<Product> orderAlphabeticalCrescent(List<Product> productList) {
         Comparator<Product> comparatorByName = Comparator.comparing(product -> product.getName());
         productList.sort(comparatorByName);
         return productList;
     }
 
+    @Override
     public List<Product> orderAlphabeticalDescending(List<Product> productList) {
         Comparator<Product> comparatorByName = Comparator.comparing(product -> product.getName());
         productList.sort(comparatorByName);

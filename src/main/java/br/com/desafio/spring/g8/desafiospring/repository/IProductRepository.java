@@ -15,4 +15,8 @@ public interface IProductRepository<T> {
         List<T> findAllProductByPrice(List<Product> products, BigDecimal priceValue) throws IOException;
         List<T> findAllProductByFreeShipping(List<Product> products, Boolean value) throws IOException;
         List<T> findAllProductByPrestige(List<Product> products, String prestige) throws IOException;
+        List<T> orderPriceCrescent(List<Product> productsList);
+        List<T> orderPriceDescending(List<Product> productsList);
+        List<T> orderAlphabeticalCrescent(List<Product> productList);
+        List<T> orderAlphabeticalDescending(List<Product> productList);
 }
