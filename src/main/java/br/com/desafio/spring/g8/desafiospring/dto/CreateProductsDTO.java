@@ -5,6 +5,10 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * @author Ronaldd Pinho
+ * @descritpion DTO para representar uma requisição de criação de uma lista de Produtos.
+ */
 @Data
 public class CreateProductsDTO {
     @JsonProperty("articles")

@@ -5,6 +5,10 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * @author Vinicius Feitoza
+ * @description DTO que representa o corpo da requisição de compra.
+ */
 @Data
 public class PurchaseDTO {
     @JsonProperty("articlesPurchaseRequest")

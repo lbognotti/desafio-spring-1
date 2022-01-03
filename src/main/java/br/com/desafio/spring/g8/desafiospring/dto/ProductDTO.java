@@ -9,6 +9,10 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+/**
+ * @author Everson Okuhara
+ * @description DTO que representa as informações da entidade Product.
+ */
 @Data
 @Builder
 @AllArgsConstructor
@@ -28,6 +32,12 @@ public class ProductDTO implements IDTO<Product> {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String prestige;
 
+
+    /**
+     * @author Everson Okuhara e Ronaldd Pinho
+     * @description Converte a instância atual de ProductDTO para Product.
+     * @return instância de Product
+     */
     @Override
     public Product toEntity() {
         return Product.builder()
@@ -42,6 +52,12 @@ public class ProductDTO implements IDTO<Product> {
                 .build();
     }
 
+    /**
+     * @author Everson Okuhara e Ronaldd Pinho
+     * @description Converte um objeto de Product para ProductDTO.
+     * @param product a instância de Product
+     * @return instância de ProductDTO
+     */
     public static ProductDTO fromEntity(Product product) {
         return ProductDTO.builder()
                 .name(product.getName())

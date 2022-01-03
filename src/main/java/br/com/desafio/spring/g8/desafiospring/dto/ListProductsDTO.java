@@ -6,6 +6,10 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * @author Lucas Bognotti
+ * @description DTO para retornar a listagem de produtos para o usuário.
+ */
 @Data
 @Builder
 public class ListProductsDTO {
