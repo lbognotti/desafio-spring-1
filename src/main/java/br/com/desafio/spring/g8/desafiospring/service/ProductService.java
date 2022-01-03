@@ -16,6 +16,11 @@ import java.util.Map;
 public class ProductService {
     private ProductRepository productRepository;
 
+    /**
+     * @author Everson
+     * @descrpition - construtor
+     * @param productRepository - instancia da classe product repository
+     */
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
@@ -54,6 +59,12 @@ public class ProductService {
         return products;
     }
 
+    /**
+     * @author Wolsen
+     * @param - filtername nome do filtro a ser usado. filterValue, valor que sera buscado no fltro especifico, Lista de produtos a ser filtrada;
+     * @throws - erro ao ler o arquivo product.jason
+     * @description - escolhe o filtro correspondente a partir do filterName, filtra com base filterValue e retorna uma lista de produtos filtrada
+     */
     public List<Product> choiceFilter (String filterName, String filterValue, List<Product> products) throws IOException{
         switch (filterName.toLowerCase()) {
             case "product":
@@ -83,6 +94,13 @@ public class ProductService {
         return products;
     }
 
+    /**
+     * @author Wolsen
+     * @param products - a lista de produtos a ser ordenada
+     * @param orderValue - tipo de ordenacao. Alfabetica crescente, decrescente etc...
+     * @return uma lista de produtos ordenada
+     * @description - A partir de uma lista de produtos escolhe e ordena com a ordenacao correspondente
+     */
     public List<Product> useOrder(List<Product> products, String orderValue) {
         switch (orderValue) {
             case "0":
@@ -102,6 +120,13 @@ public class ProductService {
         return products;
     }
 
+    /**
+     * @author Vinicius
+     * @param products - lista de produtos para requisicao  de compra
+     * @return ticket de requisicao de compra
+     * @description - A partir de uma lista, verifica se o produto existe e retorna ticket contendo Id, Lista de produtos existentes requisitados e valor Total
+     * @throws IOException - pode gerar excessao ao ler arquivo de buscar produtos
+     */
     public Ticket purchaseRequest(List<Product> products) throws IOException {
         try{
             List <Product> productList = this.productRepository.findAllAvailableProduct();
