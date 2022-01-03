@@ -19,4 +19,5 @@ public interface IProductRepository<T> {
         List<T> orderPriceDescending(List<Product> productsList);
         List<T> orderAlphabeticalCrescent(List<Product> productList);
         List<T> orderAlphabeticalDescending(List<Product> productList);
+        T checkProductExist(Long productId, String name, String brand, List<Product> productList);
 }

@@ -2,11 +2,13 @@ package br.com.desafio.spring.g8.desafiospring.service;
 
 import br.com.desafio.spring.g8.desafiospring.advice.handler.ProductNotFoundException;
 import br.com.desafio.spring.g8.desafiospring.entity.Product;
+import br.com.desafio.spring.g8.desafiospring.entity.Ticket;
 import br.com.desafio.spring.g8.desafiospring.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,16 +28,6 @@ public class ProductService {
                 throw new IOException("Erro ao cadastrar o product" + product.getName());
             }
         }
-    }
-
-    public List<Product> findAllProduct() throws IOException {
-        List<Product> products;
-        try {
-            products = this.productRepository.findAllAvailableProduct();
-        } catch (IOException e) {
-            throw new ProductNotFoundException(e.getMessage());
-        }
-       return products;
     }
 
     public List<Product> findFilter(Map<String, String> allParams) throws IOException {
@@ -95,5 +87,20 @@ public class ProductService {
             default:
         }
         return products;
+    }
+
+    public Ticket purchaseRequest(List<Product> products) throws IOException {
+        try{
+            List <Product> productList = this.productRepository.findAllAvailableProduct();
+            List <Product> purchaseList = new ArrayList<>();
+            for (Product product : products){
+                purchaseList.add(this.productRepository.checkProductExist(product.getProductId(), product.getName(), product.getBrand(), productList));
+            }
+            double totalValue = purchaseList.stream().mapToDouble(product -> product.getPrice().doubleValue()*product.getQuantity()).reduce((acc,product)->acc+product).getAsDouble();
+            Ticket ticket = new Ticket(1L, purchaseList, totalValue);
+            return ticket;
+        }catch(IOException e){
+            throw new ProductNotFoundException("Produto não encontrado.");
+        }
     }
 }

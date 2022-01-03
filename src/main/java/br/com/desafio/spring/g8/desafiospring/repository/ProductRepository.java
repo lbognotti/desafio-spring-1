@@ -103,4 +103,12 @@ public class ProductRepository implements IProductRepository<Product> {
         Collections.reverse(productList);
         return productList;
     }
+
+    @Override
+    public Product checkProductExist(Long productId, String name, String brand, List<Product> productList) {
+        return productList.stream()
+                .filter(product -> product.getProductId().equals(productId))
+                .filter(product -> product.getName().equals(name))
+                .filter(product -> product.getBrand().equals(brand)).findFirst().get();
+    }
 }

@@ -1,8 +1,9 @@
 package br.com.desafio.spring.g8.desafiospring.controller;
 
-import br.com.desafio.spring.g8.desafiospring.dto.CreateProductsDTO;
-import br.com.desafio.spring.g8.desafiospring.dto.ListProductsDTO;
+import br.com.desafio.spring.g8.desafiospring.dto.*;
+import br.com.desafio.spring.g8.desafiospring.dto.TicketResponse;
 import br.com.desafio.spring.g8.desafiospring.entity.Product;
+import br.com.desafio.spring.g8.desafiospring.entity.Ticket;
 import br.com.desafio.spring.g8.desafiospring.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +40,18 @@ public class ProductController {
     public ResponseEntity<List<Product>> findAllProductFilter(@RequestParam Map<String, String> allParams) throws IOException {
         return ResponseEntity.ok(this.productService.findFilter(allParams));
     }
+
+    @PostMapping("/purchase-request")
+    public ResponseEntity<TicketResponse> purchaseRequest(@RequestBody PurchaseDTO purchaseDTO) throws IOException {
+        List<Product> products = purchaseDTO.getArticlesPurchaseRequest()
+                .stream()
+                .map(article -> article.toEntity())
+                .collect(Collectors.toList());
+        Ticket ticket = this.productService.purchaseRequest(products);
+        TicketResponse.TicketDTO ticketDTO = new TicketResponse.TicketDTO(ticket.getId(), CompleteProductDTO.converte(ticket.getProducts()), ticket.getValorTotal());
+        return ResponseEntity.ok(TicketResponse.builder().ticket(ticketDTO).build());
+    }
+
 
 //    @GetMapping("/findAllDto")
 //    public ResponseEntity<ListProductsDTO> findAllDto() throws IOException {
