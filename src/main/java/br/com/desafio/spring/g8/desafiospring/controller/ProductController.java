@@ -51,32 +51,4 @@ public class ProductController {
         TicketResponse.TicketDTO ticketDTO = new TicketResponse.TicketDTO(ticket.getId(), CompleteProductDTO.converte(ticket.getProducts()), ticket.getValorTotal());
         return ResponseEntity.ok(TicketResponse.builder().ticket(ticketDTO).build());
     }
-
-
-//    @GetMapping("/findAllDto")
-//    public ResponseEntity<ListProductsDTO> findAllDto() throws IOException {
-//        List<ProductDTO> productsDto = this.productService.findAllProduct()
-//                .stream()
-//                .map(product -> ProductDTO.fromEntity(product))
-//                .collect(Collectors.toList());
-//
-//        ListProductsDTO responseBody = ListProductsDTO.builder()
-//                .articlesDTO(productsDto)
-//                .build();
-//
-//        return ResponseEntity.ok(responseBody);
-//    }
-//
-//    //Teste de DTO - Post
-//    @PostMapping("/createDto")
-//    public ResponseEntity<Object> createDto(@RequestBody CreateProductsDTO createProductsDTO) throws IOException {
-//        List<Product> products = createProductsDTO.getArticles()
-//                .stream()
-//                .map(article -> article.toEntity())
-//                .collect(Collectors.toList());
-//
-//        this.productService.createProduct(products);
-//        return ResponseEntity.ok().build();
-//    }
-//    }
 }
